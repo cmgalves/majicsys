@@ -1,6 +1,6 @@
-ALTER procedure [dbo].[sp_incluiAlteraCaracteristica]
+ALTER procedure [dbo].[sp_incluiAlteraCliente]
 
---sp_incluiAlteraCaracteristica 'I', '002', 'Carac numero 2'
+--sp_incluiAlteraCliente 'I', '002', 'Carac numero 2'
 --SELECT * FROM PCP..qualCarac
 	@tipoCarac varchar(01),
 	@codCarac varchar(03),

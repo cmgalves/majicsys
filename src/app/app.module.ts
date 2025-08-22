@@ -12,7 +12,10 @@ import { CommonModule } from '@angular/common';
 
 // Firebase services + enviorment module
 import { environment } from '../environments/environment';
-
+import {AngularFireModule } from '@angular/fire';
+import {AngularFireDatabaseModule} from '@angular/fire/database'
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import { AngularFireAuthModule} from '@angular/fire/auth';
 
 // Material
 import { MatButtonModule } from '@angular/material/button';
@@ -27,7 +30,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 // imports sobre o login
-import { AuthService } from './components/login/shared/services/auth.service';
 import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 @NgModule({
@@ -51,14 +53,16 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     MatTableModule,
     MatMenuModule,
     BrowserModule,
+    AngularFireModule.initializeApp(environment.dadosfire),
+    AngularFireDatabaseModule,
+    AngularFirestoreModule,
+    AngularFireAuthModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
   ],
-  providers: [AuthService, {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}],
-  // exports: [MatAutocompleteModule, MatInputModule,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

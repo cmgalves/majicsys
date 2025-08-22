@@ -398,7 +398,7 @@ export class funcsService {
   enviarLoteProteus(loteItem, reclassifica = false) {
     let nVai = 0
     var caracEnviadas = 0;
-    let codCaracteristica = [];
+    let codCliente = [];
     let cRet = ''
 
     //verifica se o lote está aprovado
@@ -427,7 +427,7 @@ export class funcsService {
             "cLote": loteItem.lote,
             "cAnalise": loteItem.analise,
             "nQuantidade": loteItem.qtdeLote,
-            "cCaracteristica": item.descCarac,
+            "cCliente": item.descCarac,
             "cResultado": item.resultxt != "" ? (item.parametro == null ? item.resultxt : item.parametro) : item.result.toString(),
             "dValidade": this.converterParaDDMMYY(loteItem.dtime, item.validadeMeses),
             "dFabricacao": this.converterParaDDMMYY(loteItem.dtime),

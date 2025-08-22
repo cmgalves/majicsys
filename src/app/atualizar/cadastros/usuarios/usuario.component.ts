@@ -43,29 +43,12 @@ export class UsuarioComponent implements OnInit {
   usuarioFone: string = '';
   usuarioDepto: string = '';
   altIncuser: string = '';
-  optPerfil: string[] = ['Apontador', 'Conferente', 'Conferente-Apontador', 'Administrador', 'Qualidade N1', 'Qualidade N2', 'Qualidade N3'];
-  arrFilial: any = ['101', '107', '117', '402', '108', '206']
   usuarios: Observable<any>;
-  displayedColumns: string[] = ['nome', 'email', 'empresa', 'perfil', 'telefone', 'depto', 'linha', 'edicao'];
   dataSource: MatTableDataSource<cadUsuario>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   linhaValor: string;
   empresaValor: string;
-
-
-  // Campina Grande - 888
-  // Servidor de HML:10.3.0.92
-  // Filiais:101,107,117,402
-
-  // Boa vista - 886
-  // Servidor de HML:10.1.0.250
-  // Filiais:108
-
-
-  // Indaiatuba - 887
-  // Servidor de HML: 10.3.0.92
-  // Filiais:206
 
 
   constructor(
@@ -75,9 +58,7 @@ export class UsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.arrUserLogado.perfil === 'Administrador') {
-      this.buscaEmpresas();
       this.buscaUsuarios();
-      this.buscaLinhas();
     } else {
       alert('Sem Acesso')
       this.router.navigate(['opResumo']);
@@ -85,31 +66,7 @@ export class UsuarioComponent implements OnInit {
     this.altIncuser = 'i';
   }
 
-  buscaLinhas() {
-    this.fj.buscaPrt('buscaLinhas', {}).subscribe(cada => {
-      this.arrLinhas = [...cada];
-    })
-  }
-
-  buscaEmpresas() {
-    const obj = {};
-    this.arrEmpresa = this.fj.buscaPrt('empresasBuntech', obj);
-
-    this.arrEmpresa.subscribe(cada => {
-      cada.forEach(xy => {
-        if (this.arrFilial.indexOf(xy.codFil) > -1) {
-          this.arrEmpresaTab.push({
-            'codFil': xy.codFil,
-            'nomeFil': xy.codFil + ' - ' + xy.nomeFil,
-            'nomeComercial': xy.nomeComercial,
-          })
-        }
-
-      });
-
-    });
-  }
-
+  
   buscaUsuarios() {
     const obj = {};
     let cPerf = ''
@@ -140,26 +97,6 @@ export class UsuarioComponent implements OnInit {
     });
   }
 
-
-  atuEmpresa() {
-    if (this.usuarioEmpresas === '') {
-      this.usuarioEmpresas = this.valEmpresa
-    } else {
-
-      if (this.usuarioEmpresas.indexOf(this.valEmpresa) < 0) {
-        this.usuarioEmpresas = this.usuarioEmpresas + ' - ' + this.valEmpresa
-      } else {
-        if (this.usuarioEmpresas.indexOf(' - ' + this.valEmpresa) > -1) {
-          this.usuarioEmpresas = this.usuarioEmpresas.replace(' - ' + this.valEmpresa, '')
-        } else {
-          this.usuarioEmpresas = this.usuarioEmpresas.replace(this.valEmpresa, '')
-        }
-      }
-    }
-    if (this.usuarioEmpresas.substring(0, 1) === ' ') {
-      this.usuarioEmpresas = this.usuarioEmpresas.substring(3, 101)
-    }
-  }
 
   incUser() {
     let conta = 0;

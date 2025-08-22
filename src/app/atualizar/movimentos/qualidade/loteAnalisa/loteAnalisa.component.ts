@@ -82,13 +82,13 @@ export class LoteAnalisaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.criarLoteCaracteristica();
+    this.criarLoteCliente();
   }
 
 
 
   // busca a relação de produtos com as loteções
-  criarLoteCaracteristica() {
+  criarLoteCliente() {
     const obj = {
       'fil': this.aProd.filial,
       'prod': this.aProd.produto,
@@ -96,7 +96,7 @@ export class LoteAnalisaComponent implements OnInit {
       'analise': this.aProd.analise
     };
 
-    this.fj.buscaPrt('criarLoteCaracteristica', obj).subscribe(x => {
+    this.fj.buscaPrt('criarLoteCliente', obj).subscribe(x => {
       this.buscaLoteDetalhes();
 
     }); //vw_pcp_relacao_lote_analisa
@@ -105,7 +105,7 @@ export class LoteAnalisaComponent implements OnInit {
   // busca a relação de produtos com as loteções
   buscaLoteDetalhes() {
     let ord = 0;
-    let codCaracteristica = '';
+    let codCliente = '';
     this.lAnalise = false
     this.lEdit = false
 
@@ -120,8 +120,8 @@ export class LoteAnalisaComponent implements OnInit {
     this.arrBusca.subscribe(cada => {
       cada.forEach(xy => {
         ord++
-        if (codCaracteristica.indexOf(xy.codCarac) < 0) {
-          codCaracteristica += xy.codCarac
+        if (codCliente.indexOf(xy.codCarac) < 0) {
+          codCliente += xy.codCarac
           this.arrDados.push({
             'id_num': xy.id_num,
             'idEspecCab': xy.idEspecCab,

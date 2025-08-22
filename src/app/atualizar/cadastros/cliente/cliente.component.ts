@@ -7,22 +7,22 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { funcsService } from '../../../funcs/funcs.service';
 
-export interface cadCaracteristica {
+export interface cadCliente {
   seq: BigInteger;
   codCarac: string;
   descCarac: string;
 }
 
 @Component({
-  selector: 'app-caracteristica',
-  templateUrl: './caracteristica.component.html',
-  styleUrls: ['./caracteristica.component.css']
+  selector: 'app-cliente',
+  templateUrl: './cliente.component.html',
+  styleUrls: ['./cliente.component.css']
 })
 
-export class CaracteristicaComponent implements OnInit {
+export class ClienteComponent implements OnInit {
   arrUserLogado = JSON.parse(localStorage.getItem('user'))[0];
-  arrCaracteristica: any = [];
-  arrCaracteristicaTab: any = [];
+  arrCliente: any = [];
+  arrClienteTab: any = [];
   opFilter: any = ''
   codCarac: string = '';
   descCarac: string = '';
@@ -31,9 +31,9 @@ export class CaracteristicaComponent implements OnInit {
   lBtnInc: boolean = false;
   lBtnAlt: boolean = false;
 
-  caracteristicas: Observable<any>;
+  clientes: Observable<any>;
   displayedColumns: string[] = ['seq', 'codCarac', 'descCarac', 'produto', 'edicao', 'itens'];
-  dataSource: MatTableDataSource<cadCaracteristica>;
+  dataSource: MatTableDataSource<cadCliente>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   class: string = '';
@@ -45,24 +45,24 @@ export class CaracteristicaComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.arrUserLogado.perfil === 'Administrador') {
-      this.buscaCaracteristicas();
+      this.buscaClientes();
     } else {
       alert('Sem Acesso')
       this.router.navigate(['opResumo']);
     }
   }
 
-  buscaCaracteristicas() {
+  buscaClientes() {
     const obj = {
-      'caracteristica': ''
+      'cliente': ''
     };
-    this.arrCaracteristica = this.fj.buscaPrt('cadastroCaracteristicas', obj);
+    this.arrCliente = this.fj.buscaPrt('cadastroClientes', obj);
 
-    this.arrCaracteristica.subscribe(cada => {
+    this.arrCliente.subscribe(cada => {
       this.seq = 0
       cada.forEach(xy => {
         this.seq++
-        this.arrCaracteristicaTab.push({
+        this.arrClienteTab.push({
           'seq': this.seq,
           'codCarac': xy.codCarac,
           'descCarac': xy.descCarac,
@@ -70,7 +70,7 @@ export class CaracteristicaComponent implements OnInit {
 
       });
 
-      this.dataSource = new MatTableDataSource(this.arrCaracteristicaTab)
+      this.dataSource = new MatTableDataSource(this.arrClienteTab)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
@@ -110,7 +110,7 @@ export class CaracteristicaComponent implements OnInit {
         'codCarac': this.codCarac,
         'descCarac': this.descCarac,
       }
-      this.fj.buscaPrt('incluiAlteraCaracteristica', obj).subscribe(q => q);
+      this.fj.buscaPrt('incluiAlteraCliente', obj).subscribe(q => q);
       this.lForm = !this.lForm;
       window.location.reload();
     }
@@ -121,7 +121,7 @@ export class CaracteristicaComponent implements OnInit {
         'codCarac': this.codCarac,
         'descCarac': this.descCarac,
       }
-      this.fj.execProd('incluiAlteraCaracteristica', obj);
+      this.fj.execProd('incluiAlteraCliente', obj);
       this.lForm = !this.lForm;
       window.location.reload();
     }

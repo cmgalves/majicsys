@@ -1,0 +1,74 @@
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore, AngularFirestoreDocument, } from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
+
+export interface User {
+  uid: string;
+  email: string;
+  displayName: string;
+  photoURL: string;
+  emailVerified: boolean;
+}
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
+})
+export class LoginComponent {
+  senha: string
+  nome: string
+  constructor(
+    public afs: AngularFirestore, // Inject Firestore service
+    public afAuth: AngularFireAuth, // Inject Firebase auth service
+    public formBuilder: FormBuilder,
+    private router: Router,
+  ) {
+
+  }
+
+  ngOnInit(): void {
+
+  }
+
+  usuarioAcesso() {
+    let n = this.nome
+    let s = this.senha
+    if (n == '' || s == '') {
+      return alert('Dados incompletos!')
+    } else {
+      return this.afAuth
+        .signInWithEmailAndPassword(n, s)
+        .then((result) => {
+          this.afAuth.authState.subscribe((user) => {
+            if (user) {
+              this.SetUserData(result.user);
+            }
+          });
+        })
+        .catch((error) => {
+          window.alert(error.message);
+        });
+    }
+  }
+
+  /* Setting up user data when sign in with username/password, 
+    sign up with username/password and sign in with social auth  
+    provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
+  SetUserData(user: any) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${user.uid}`
+    );
+    const userData: User = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified,
+    };
+    localStorage.setItem('aUser', JSON.stringify(userData));
+    this.router.navigate(['inicio']);
+  }
+}

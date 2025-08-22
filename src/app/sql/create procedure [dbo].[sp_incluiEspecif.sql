@@ -1,6 +1,6 @@
 create procedure [dbo].[sp_incluiEspecificacoes]
 
---sp_incluiAlteraCaracteristica 2, '001', 'descricação gocio'
+--sp_incluiAlteraCliente 2, '001', 'descricação gocio'
 --SELECT * FROM PCP..qualCarac
 	@tipoCarac varchar(01),
 	@codCarac varchar(03),

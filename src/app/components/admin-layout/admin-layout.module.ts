@@ -33,7 +33,7 @@ import { DoclistaComponent } from 'app/atualizar/movimentos/doc/doclista/doclist
 import { DocdetComponent } from 'app/atualizar/movimentos/doc/docdet/docdet.component';
 import { ConfiguraComponent } from '../configura/configura.component';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { CaracteristicaComponent } from 'app/atualizar/cadastros/caracteristica/caracteristica.component';
+import { ClienteComponent } from 'app/atualizar/cadastros/cliente/cliente.component';
 import { EspecificaComponent } from 'app/atualizar/movimentos/qualidade/especifica/especifica.component';
 import { RevisaComponent } from 'app/atualizar/movimentos/qualidade/revisa/revisa.component';
 import { HistoricoComponent } from 'app/atualizar/movimentos/qualidade/historico/historico.component';
@@ -89,7 +89,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
     RecursoComponent,
     GrupoRecursoComponent,
     SaldoComponent,
-    CaracteristicaComponent,
+    ClienteComponent,
     EspecificaComponent,
     RevisaComponent,
     HistoricoComponent,

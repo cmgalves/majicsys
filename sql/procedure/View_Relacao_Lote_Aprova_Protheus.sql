@@ -178,7 +178,7 @@ if @cTipo = 'R' --Rejeição do Lote tela loteAprova
 	end
 
 
-if @cTipo = 'E' --Incluir, editar / alterar caracteristica do lote Analise de lote
+if @cTipo = 'E' --Incluir, editar / alterar cliente do lote Analise de lote
 	begin
 		if @existReg > 0 
 			begin

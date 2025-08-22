@@ -113,7 +113,7 @@ export class LoteAprovaComponent implements OnInit {
 
   buscaLoteDetalhes() {
     let ord = 0;
-    let codCaracteristica = '';
+    let codCliente = '';
 
     const obj = {
       'filial': this.aProd.filial,
@@ -126,8 +126,8 @@ export class LoteAprovaComponent implements OnInit {
     this.arrBusca.subscribe(cada => {
       cada.forEach(xy => {
         ord++
-        if (codCaracteristica.indexOf(xy.codCarac) < 0) {
-          codCaracteristica += xy.codCarac
+        if (codCliente.indexOf(xy.codCarac) < 0) {
+          codCliente += xy.codCarac
           this.arrDados.push({
             'id_num': xy.id_num,
             'idEspecCab': xy.idEspecCab,
@@ -531,7 +531,7 @@ export class LoteAprovaComponent implements OnInit {
     this.arrBusca.subscribe(cada => {
       cada.forEach(xy => {
         const item = xy.itemin
-        aProt.push({ "cLFilial": xy.filial, "cProduto": xy.produto, "cArmazem": '01', "cOP": xy.op, "cLote": xy.lote, "nQuantidade": xy.qtdeProd, "dValidade": xy.dtVenc, "dFabricacao": xy.dtProd, "cCaracteristica": xy.descCarac, "cValMin": xy.itemin.toString(), "cValMax": xy.itemax.toString(), "cResultado": xy.obtido.toString(), "cStatus": xy.sitLote })
+        aProt.push({ "cLFilial": xy.filial, "cProduto": xy.produto, "cArmazem": '01', "cOP": xy.op, "cLote": xy.lote, "nQuantidade": xy.qtdeProd, "dValidade": xy.dtVenc, "dFabricacao": xy.dtProd, "cCliente": xy.descCarac, "cValMin": xy.itemin.toString(), "cValMax": xy.itemax.toString(), "cResultado": xy.obtido.toString(), "cStatus": xy.sitLote })
       });
       const retProdParcial = this.fj.prodLote(aProt);
       retProdParcial.subscribe(ret => {

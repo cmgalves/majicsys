@@ -2,9 +2,9 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[sp_incluiAlteraCaracteristica]
+ALTER procedure [dbo].[sp_incluiAlteraCliente]
 
---sp_incluiAlteraCaracteristica 001, 'descricação do negocio'
+--sp_incluiAlteraCliente 001, 'descricação do negocio'
 	@tipoCarac int,
 	@codCarac varchar(03),
 	@descCarac varchar(55)

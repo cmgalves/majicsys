@@ -1,4 +1,4 @@
---ALTER view [dbo].[vw_pcp_caracteristica] as
+--ALTER view [dbo].[vw_pcp_cliente] as
 
 SELECT
     idEspecCab, idEspecItens, cabProduto, descrProd, 
